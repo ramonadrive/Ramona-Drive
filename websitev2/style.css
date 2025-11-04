@@ -170,8 +170,8 @@ nav a.active {
     display: grid; 
     /* Create three columns of equal width (1 fraction of the available space each) */
     grid-template-columns: repeat(3, 1fr); 
-    /* Add some space between the grid items */
-    gap: 20px; 
+    /* MODIFIED: Increased space between the grid items (columns and rows) */
+    gap: 40px; 
     padding: 20px 0;
     /* This ensures the grid itself remains centered inside the content container */
     max-width: 900px; 
@@ -181,6 +181,8 @@ nav a.active {
 .grid-item {
     /* Center text within each item */
     text-align: center; 
+    /* ADDED: Set to relative for album art pseudo-elements */
+    position: relative; 
 }
 
 .grid-item img {
@@ -190,14 +192,125 @@ nav a.active {
     /* Optional: Add a subtle border or shadow to the images */
     border: 1px solid #009dff;
     box-shadow: 0 0 10px rgba(167, 217, 247, 0.3);
+    /* ADDED: Transition for smooth hover effect */
+    transition: all 0.2s ease-in-out; 
+    /* ADDED: Ensures the image is on top of its pseudo-elements */
+    position: relative; 
+    z-index: 2;
 }
 
+/* --- NEW: Glitch Hover Effect Styles --- */
+
+/* Base style for pseudo-elements (hidden by default) */
+.grid-item::before,
+.grid-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Must be below the image but above the border/shadow of the image's container */
+    z-index: 1; 
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.1s ease; /* Faster transition for the glitch feel */
+}
+
+/* Pseudo-element for the cyan ghosting effect */
+.grid-item::before {
+    /* Inherit the image's original shadow for the ghost effect */
+    box-shadow: 0 0 10px rgba(167, 217, 247, 0.3);
+    /* Cyan color for glitch effect */
+    background-color: rgba(0, 255, 255, 0.2); 
+}
+
+/* Pseudo-element for the red ghosting effect */
+.grid-item::after {
+    /* Inherit the image's original shadow for the ghost effect */
+    box-shadow: 0 0 10px rgba(167, 217, 247, 0.3);
+    /* Red color for glitch effect */
+    background-color: rgba(255, 0, 0, 0.2); 
+}
+
+/* Hover state for the main image */
+.grid-item:hover img {
+    /* Slight scale for the glitch feel */
+    transform: scale(1.02); 
+    box-shadow: 0 0 20px rgba(167, 217, 247, 0.7);
+    border-color: #ffffff; /* Make the border whiter for the glitch moment */
+    animation: image-glitch-shake 0.3s steps(2, end) infinite alternate;
+}
+
+/* Hover state: Activate the pseudo-elements and start their animations */
+.grid-item:hover::before {
+    opacity: 1;
+    animation: glitch-before 0.3s steps(2, end) infinite alternate;
+}
+
+.grid-item:hover::after {
+    opacity: 1;
+    animation: glitch-after 0.3s steps(2, end) infinite alternate;
+}
+
+/* --- Glitch Text Styling --- */
 .grid-item p {
     /* Style for the album title text */
     margin-top: 10px;
     font-weight: bold;
     color: #ffffff;
+    transition: color 0.2s ease-in-out; 
+    /* Ensures the paragraph box itself remains static */
 }
+
+.grid-item:hover p {
+    color: #009dff; /* Change text color on hover */
+    /* Apply the animation to the text's characters via text-shadow */
+    animation: text-glitch-shake 0.3s steps(2, end) infinite alternate;
+}
+
+/* --- NEW: Glitch Keyframe Animations --- */
+
+/* Animation for the main image to shake slightly */
+@keyframes image-glitch-shake {
+    0% { transform: translate(-1px, 1px) scale(1.02); }
+    20% { transform: translate(1px, -1px) scale(1.02); }
+    40% { transform: translate(-2px, 2px) scale(1.02); }
+    60% { transform: translate(2px, -2px) scale(1.02); }
+    80% { transform: translate(-1px, 1px) scale(1.02); }
+    100% { transform: translate(1px, -1px) scale(1.02); }
+}
+
+/* Animation for the text: Focus only on text-shadow for a static box, jittery letters */
+@keyframes text-glitch-shake {
+    /* Rely purely on text-shadow for character distortion */
+    0% { text-shadow: -1px 0 #009dff, 1px 0 red; }
+    20% { text-shadow: 1px 0 #009dff, -1px 0 red; }
+    40% { text-shadow: -2px 0 #009dff, 2px 0 red; }
+    60% { text-shadow: 2px 0 #009dff, -2px 0 red; }
+    80% { text-shadow: -1px 0 #009dff, 1px 0 red; }
+    100% { text-shadow: 1px 0 #009dff, -1px 0 red; }
+}
+
+/* Animation for the cyan (::before) element */
+@keyframes glitch-before {
+    0% { transform: translate(4px, 4px) scale(1.01); opacity: 1; }
+    20% { transform: translate(-4px, -4px) scale(1.01); opacity: 0.5; }
+    40% { transform: translate(8px, 8px) scale(1.01); opacity: 1; }
+    60% { transform: translate(-2px, -2px) scale(1.01); opacity: 0.5; }
+    80% { transform: translate(6px, 6px) scale(1.01); opacity: 1; }
+    100% { transform: translate(-8px, -8px) scale(1.01); opacity: 0.5; }
+}
+
+/* Animation for the red (::after) element */
+@keyframes glitch-after {
+    0% { transform: translate(-6px, -6px) scale(1.01); opacity: 0.5; }
+    20% { transform: translate(6px, 6px) scale(1.01); opacity: 1; }
+    40% { transform: translate(-8px, -8px) scale(1.01); opacity: 0.5; }
+    60% { transform: translate(4px, 4px) scale(1.01); opacity: 1; }
+    80% { transform: translate(-2px, -2px) scale(1.01); opacity: 0.5; }
+    100% { transform: translate(2px, 2px) scale(1.01); opacity: 1; }
+}
+
 
 /* --- Footer and Address Styling --- */
 footer {
