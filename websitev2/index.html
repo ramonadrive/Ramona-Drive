@@ -1,0 +1,108 @@
+<!doctype html>  
+    <html lang="en">  
+        <head>  
+            <meta charset="UTF-8">  
+            <meta name="viewport" content="width=device-width, initial-scale=1">  
+            <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />  
+            <meta http-equiv="Pragma" content="no-cache" />  
+            <meta http-equiv="Expires" content="0" /> 
+            <link rel="stylesheet" type="text/css" href="style.css">
+            <title>Home</title>  
+        </head>   
+       <body>
+        <header class="sticky-nav">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="logo.svg" alt="Ramona Drive Band Logo" class="nav-logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="store.html">Store</a></li> 
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="hero-video-container">
+            <video src="https://allthatremainsonline.com/cdn/shop/videos/c/vp/07e3c38547e14a3db38c07fcac220c4d/07e3c38547e14a3db38c07fcac220c4d.HD-1080p-7.2Mbps-13680704.mp4?v=0" 
+                   autoplay 
+                   loop 
+                   muted 
+                   playsinline 
+                   poster="placeholder_album_art.png">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video-overlay">
+                <h2><img src="logo.svg" alt="Ramona Drive Band Logo" class="band-logo"></h2>
+                <p class="slogan">Music and live shows coming soon</p>
+            </div>
+        </div>
+        <div class="content">
+            <h2>New Releases</h2>
+
+    <div class="grid-container">
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 1">
+            <p>Album Title 1</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 2">
+            <p>Album Title 2</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 3">
+            <p>Album Title 3</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 4">
+            <p>Album Title 4</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 5">
+            <p>Album Title 5</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 6">
+            <p>Album Title 6</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 7">
+            <p>Album Title 7</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 8">
+            <p>Album Title 8</p>
+        </div>
+        <div class="grid-item">
+            <img src="placeholder_album_art.png" alt="Album Art 9">
+            <p>Album Title 9</p>
+        </div>
+    </div>
+            <address>
+                <p>Location: San Luis Obispo, California</p>
+                <p>Phone: <a href="tel:94948990327">(949) 899-0327</a></p>
+            </address>
+        </div>
+        <main>
+            </main>
+        <footer>
+            <p>© All rights reserved. Ramona Drive, 2025.</p>
+        </footer>
+        
+        <script>
+            const header = document.querySelector('.sticky-nav');
+            const scrollPoint = 50; 
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > scrollPoint) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        </script>
+    </body>
+</html>
