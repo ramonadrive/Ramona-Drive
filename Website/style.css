@@ -5,4 +5,9 @@ img {
 	display: block;
 }
 
+body {
+  background-color: black; /* Or use the hex code #000000 */
+  color: white; /* To ensure text is visible on the black background */
+}
+
 /*Please don’t change this CSS stylesheet for the content hierarchy assginment */
