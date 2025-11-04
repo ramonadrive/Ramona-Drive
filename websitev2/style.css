@@ -1,0 +1,220 @@
+/* --- Basic Reset and Typography --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 0; 
+    background-color: #000000; 
+    color: #ffffff; 
+}
+
+h1, h2 {
+    /* Adjusted heading color for visibility against black background - a light blue/cyan */
+    color: #009dff; 
+}
+
+/* --- Sticky Header and Navigation (Initial Transparent State) --- */
+.sticky-nav {
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    /* Set background to fully transparent */
+    background-color: transparent; 
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    
+    /* Initial unblurred state */
+    backdrop-filter: blur(0px); 
+    -webkit-backdrop-filter: blur(0px);
+    box-shadow: none; 
+    
+    /* Set up the transition for a smooth change */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+    
+    z-index: 1000; 
+    height: 80px; 
+    box-sizing: border-box;
+}
+
+/* --- Navigation Scrolled State (Blur and Solid Background Applied) --- */
+.sticky-nav.scrolled {
+    /* Add the semi-transparent background and blur for the scrolled state */
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    /* Add a soft, feathered shadow at the bottom for a smooth blend */
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Logo Styling (In Nav) --- */
+.logo-container {
+    height: 100%; 
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.nav-logo {
+    max-height: 100%; 
+    width: 10em;
+}
+
+/* --- Navigation List --- */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px; 
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover,
+nav a.active {
+    /* Adjusted hover background color for better visibility on transparent/scrolling content */
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: #009dff; 
+    border-radius: 5px;
+}
+
+/* --- NEW: Hero Video Container --- */
+.hero-video-container {
+    /* Set the height of the video section (adjust as desired) */
+    height: 60vh; 
+    width: 100%;
+    overflow: hidden; /* Important to hide video overflow */
+    position: relative; /* Context for absolute-positioned elements (like the overlay) */
+    margin-top: 0; 
+}
+
+.hero-video-container video {
+    /* Make the video fill its container */
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /* Ensure the video covers the entire container without distortion */
+    object-fit: cover; 
+}
+
+/* --- NEW: Video Overlay for Logo/Slogan (On Top of Video) --- */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Center the content (logo/slogan) both horizontally and vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    /* Add a subtle dark overlay for better text contrast */
+    background: rgba(0, 0, 0, 0.2); 
+    
+    /* Increased z-index to ensure it layers above the video at all times */
+    z-index: 550; 
+    
+    /* Add padding to account for the sticky nav bar height */
+    padding-top: 80px; 
+    box-sizing: border-box;
+}
+
+/* --- LOGO FIXES: Ensure the tall logo is visible and centered --- */
+.video-overlay h2 {
+    /* Add position and higher z-index to establish a strong stacking context for the logo wrapper */
+    position: relative;
+    z-index: 551;
+    /* Remove default h2 margins which can push the logo out of view */
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px; 
+}
+
+.video-overlay .band-logo {
+    /* MODIFIED: Explicitly set height to force rendering/scaling for the tall logo */
+    height: 50vh; 
+    width: auto;
+    
+    /* Keep max constraints for safety on different screen sizes */
+    max-height: 50vh; 
+    max-width: 50vw; 
+}
+
+/* --- Main Content Area --- */
+.content {
+    padding: 20px 40px;
+    max-width: 1200px; 
+    margin: 0 auto;
+    background-color: #000000; 
+    color: #ffffff; 
+    min-height: 80vh; 
+    /* Center the text inside the main content area */
+    text-align: center; 
+}
+
+/* --- New Releases Grid Styling (3 Columns) --- */
+.grid-container {
+    /* Enable CSS Grid Layout */
+    display: grid; 
+    /* Create three columns of equal width (1 fraction of the available space each) */
+    grid-template-columns: repeat(3, 1fr); 
+    /* Add some space between the grid items */
+    gap: 20px; 
+    padding: 20px 0;
+    /* This ensures the grid itself remains centered inside the content container */
+    max-width: 900px; 
+    margin: 0 auto;
+}
+
+.grid-item {
+    /* Center text within each item */
+    text-align: center; 
+}
+
+.grid-item img {
+    /* Ensure the album art images fill their container and maintain aspect ratio */
+    width: 100%; 
+    height: auto;
+    /* Optional: Add a subtle border or shadow to the images */
+    border: 1px solid #009dff;
+    box-shadow: 0 0 10px rgba(167, 217, 247, 0.3);
+}
+
+.grid-item p {
+    /* Style for the album title text */
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* --- Footer and Address Styling --- */
+footer {
+    background-color: #1a1a1a;
+    color: #cccccc;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+}
+
+address p {
+    font-style: normal;
+    margin: 5px 0;
+    color: #aaaaaa;
+}
+
+address a {
+    color: #009dff;
+    text-decoration: none;
+}
