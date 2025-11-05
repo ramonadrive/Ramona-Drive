@@ -1,0 +1,587 @@
+/* --- Basic Reset and Typography --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-top: 0; 
+    background-color: #000000; 
+    color: #ffffff; 
+    /* NEW: Prevent horizontal scrolling caused by large elements */
+    overflow-x: hidden; 
+}
+
+h1, h2 {
+    /* MODIFIED: Increased font-size for h1 and h2 */
+    font-size: 3rem; 
+    /* Adjusted heading color for visibility against black background - a light blue/cyan */
+    color: #009dff; 
+}
+
+/* --- Sticky Header and Navigation (Initial Transparent State) --- */
+.sticky-nav {
+    position: fixed; 
+    top: 0;
+    width: 100%;
+    /* Set background to fully transparent */
+    background-color: transparent; 
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    
+    /* Initial unblurred state */
+    backdrop-filter: blur(0px); 
+    -webkit-backdrop-filter: blur(0px);
+    box-shadow: none; 
+    
+    /* Set up the transition for a smooth change */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+    
+    z-index: 1000; 
+    height: 80px; 
+    box-sizing: border-box;
+}
+
+/* --- Navigation Scrolled State (Blur and Solid Background Applied) --- */
+.sticky-nav.scrolled {
+    /* Add the semi-transparent background and blur for the scrolled state */
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    /* Add a soft, feathered shadow at the bottom for a smooth blend */
+    box-shadow: 0 4px 6px -4px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Logo Styling (In Nav) --- */
+.logo-container {
+    height: 100%; 
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.nav-logo {
+    max-height: 100%; 
+    width: 10em;
+}
+
+/* --- Navigation List --- */
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px; 
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+    /* Added: Capitalizes the navigation text */
+    text-transform: uppercase;
+}
+
+nav a:hover,
+nav a.active {
+    /* Adjusted hover background color for better visibility on transparent/scrolling content */
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: #009dff; 
+    border-radius: 5px;
+}
+
+/* --- NEW: Hero Video Container --- */
+.hero-video-container {
+    /* MODIFIED: Increased height to 75vh */
+    height: 75vh; 
+    width: 100%;
+    overflow: hidden; /* Important to hide video overflow */
+    position: relative; /* Context for absolute-positioned elements (like the overlay) */
+    margin-top: 0; 
+}
+
+.hero-video-container video {
+    /* Make the video fill its container */
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    /* Ensure the video covers the entire container without distortion */
+    object-fit: cover; 
+}
+
+/* --- NEW: Video Feathering Effect (Blends into black background) --- */
+.hero-video-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient from transparent at 70% height to solid black at 100% height */
+    background-image: linear-gradient(to bottom, transparent 70%, #000000 100%);
+    z-index: 500; /* Below logo/slogan (550) */
+    pointer-events: none; 
+}
+
+/* --- NEW: Video Overlay for Logo/Slogan (On Top of Video) --- */
+.video-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* MODIFIED: Aligns content to the top */
+    justify-content: flex-start; 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+    /* Add a subtle dark overlay for better text contrast */
+    background: rgba(0, 0, 0, 0.2); 
+    
+    /* Increased z-index to ensure it layers above the video at all times */
+    z-index: 550; 
+    
+    /* MODIFIED: Decreased padding to push content UP from the top edge slightly more */
+    padding-top: 50px; 
+    box-sizing: border-box;
+}
+
+/* --- LOGO FIXES: Ensure the tall logo is visible and centered --- */
+.video-overlay h2 {
+    /* Add position and higher z-index to establish a strong stacking context for the logo wrapper */
+    position: relative;
+    z-index: 551;
+    /* Remove default h2 margins which can push the logo out of view */
+    margin: 0;
+    padding: 0;
+    /* Margin to separate the logo from where the slogan used to be/content below */
+    margin-bottom: 20px; 
+}
+
+.video-overlay .band-logo {
+    /* MODIFIED: Explicitly set height to force rendering/scaling for the tall logo */
+    height: 60vh; 
+    width: auto;
+    
+    /* Keep max constraints for safety on different screen sizes */
+    max-height: 60vh; 
+    max-width: 50vw; 
+}
+
+/* --- Main Content Area --- */
+.content {
+    /* FIXED: Set padding to 100px top to clear the 80px nav bar + 20px space. */
+    padding: 100px 40px 20px 40px; 
+    
+    /* MODIFIED: Increased max-width to 1600px to make the page wider */
+    max-width: 1600px; 
+    margin: 0 auto;
+    background-color: #000000; 
+    color: #ffffff; 
+    min-height: 80vh; 
+    /* Center the text inside the main content area */
+    text-align: center; 
+}
+
+/* NEW: Specific class for the About page content container to increase top space. */
+.about-page-content {
+    padding-top: 160px; /* Overrides the 100px in .content for the About page */
+}
+
+/* --- NEW: Events Section Styling (removed inline styles) --- */
+.events-section {
+    margin-bottom: 50px;
+    line-height: 1.8;
+}
+
+/* MODIFIED: Main event line container for centered alignment */
+.events-section p {
+    display: flex; 
+    /* MODIFIED: Reverting to space-between for left/right alignment */
+    justify-content: space-between; 
+    
+    /* NEW: Center the entire block by applying max-width and margin: auto */
+    /* MODIFIED: Increased max-width to 1000px for wider event list */
+    max-width: 1000px; 
+    margin: 0 auto;
+    
+    position: relative; /* Context for the absolutely positioned location text */
+    align-items: center; 
+    padding: 10px 0; 
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    box-sizing: border-box; 
+    /* gap removed: elements will be separated by space-between and explicit margins */
+}
+
+/* NEW: Style for the event date (naturally aligns left in the flex container) */
+.event-date {
+    z-index: 10;
+    /* ADDED BACK: Margin to prevent overlap with the centered location text */
+    margin-right: 20px; 
+}
+
+/* NEW: Style for the event location (center-aligned) */
+.event-location {
+    /* ADDED BACK: Absolute positioning for center alignment between left/right elements */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); 
+    
+    color: #ffffff; 
+    z-index: 1; 
+    padding: 0 10px; 
+    white-space: nowrap;
+}
+
+/* MODIFIED: The ticket button */
+.events-section p .event-ticket-button {
+    position: relative; 
+    z-index: 10;
+    /* ADDED BACK: Margin to prevent overlap with the centered location text */
+    margin-left: 20px; 
+}
+
+.events-section p:last-child {
+    border-bottom: none; /* Remove border from the last item in the list */
+}
+
+/* ------------------------------------------- */
+/* --- NEW: SWIPER COVERFLOW CAROUSEL STYLING --- */
+/* ------------------------------------------- */
+
+/* Container for the entire Swiper component, used for scroll reveal */
+.swiper-carousel-container {
+    /* Center the container on the page */
+    max-width: 90vw; /* Make it wide for the effect */
+    margin: 80px auto 20px auto;
+    position: relative;
+    /* This establishes the size for the inner swiper-container */
+    width: 100%;
+    /* MODIFIED: Increased height to accommodate the slides */
+    height: 350px; 
+    padding-bottom: 50px; /* Space for potential controls or shadow below */
+}
+
+/* Core Swiper Container */
+.swiper-container {
+    width: 100%;
+    height: 100%;
+    /* Allow slides to appear outside the container for the effect */
+    overflow: visible !important; 
+}
+
+/* Swiper Slide (The individual Album Art) */
+.swiper-slide {
+    /* FIXED: Set fixed, equal width/height for square slides */
+    width: 300px !important; 
+    height: 300px !important; 
+    
+    /* Ensure the slide is ready for absolute content positioning */
+    position: relative;
+    text-align: center;
+    
+    /* Center slide text vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    
+    /* Add a subtle 3D shadow/glow to the slides */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 157, 255, 0.2);
+    /* MODIFIED: Changed background to pure black for better image contain mode */
+    background-color: #000000;
+    
+    /* Transition for hover effects */
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+/* Album Image Wrapper */
+.swiper-slide .album-image {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* NEW: Ensures the image wrapper is what the button covers */
+    position: relative; 
+}
+
+/* Album Art Image */
+.swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    /* FIXED: Ensures the image fits entirely within the slide without cropping */
+    object-fit: contain; 
+    transition: transform 0.4s ease-out, filter 0.4s ease-out;
+}
+
+/* Album Content/Button Area */
+.swiper-slide .album-content {
+    /* Adjusting bottom placement to align with the slide base */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    /* Set opacity to 0 on non-active slides */
+    opacity: 0; 
+    transition: opacity 0.4s ease-out;
+    /* NEW: Ensure this is on top of the image */
+    z-index: 10; 
+}
+
+/* Center the button within the album content */
+.swiper-slide .album-content .glitch-button {
+    margin-top: 10px;
+}
+
+/* Active Slide Effects for Content (KEEP THIS RULE) */
+.swiper-slide-active .album-content {
+    opacity: 1; /* Show button on active slide */
+}
+
+/* Hover effect for the image inside the slide */
+.swiper-slide:hover img {
+    transform: scale(1.05); /* Zoom in slightly */
+}
+
+/* Slide hover effect (for when you hover over any slide) */
+.swiper-slide:hover {
+    border-color: #009dff;
+    box-shadow: 0 10px 40px rgba(0, 157, 255, 0.4);
+}
+
+
+/* ------------------------------------------- */
+/* --- SWIPER NAVIGATION BUTTON STYLING --- */
+/* ------------------------------------------- */
+
+/* Base style for navigation buttons */
+.swiper-carousel-container button {
+    position: absolute;
+    top: 50%;
+    /* Rotate the SVG 90deg to act as left/right arrows */
+    transform: translateY(-50%) rotate(90deg); 
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease-out, transform 0.3s ease-out;
+    outline: none;
+}
+
+.swiper-carousel-container button:focus {
+    outline: 2px solid #009dff;
+    outline-offset: 2px;
+}
+
+/* SVG icon styling */
+.swiper-carousel-container button svg {
+    fill: currentColor;
+    width: 16px;
+    height: 9px;
+    transition: fill 0.3s ease-out;
+}
+
+.swiper-carousel-container button:hover {
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.1) rotate(90deg);
+}
+
+/* Position for the Previous button */
+.slider-btn-prev {
+    left: 20px;
+    color: #009dff;
+}
+
+/* Position for the Next button */
+.slider-btn-next {
+    right: 20px;
+    color: #009dff;
+}
+
+
+/* --- Footer and Address Styling --- */
+.centered-address {
+    text-align: center; /* Centers the text within the address block */
+    max-width: 500px; 
+    margin: 40px auto; /* Centers the address block itself and adds top/bottom margin */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer {
+    background-color: #1a1a1a;
+    color: #cccccc;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+}
+
+address p {
+    font-style: normal;
+    margin: 5px 0;
+    color: #aaaaaa;
+}
+
+address a {
+    color: #009dff;
+    text-decoration: none;
+}
+
+/* ------------------------------------------- */
+/* --- Social Media Popup Menu Styles (Bottom-Right, Slide-Left) --- */
+/* ------------------------------------------- */
+
+/* Container positions the entire unit at the bottom right of the video */
+.social-menu-container {
+    position: absolute;
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 560;  
+    display: flex;
+    /* REVERSED ORDER: This makes the links (which are second in HTML) appear to the left of the button (which is first in HTML) */
+    flex-direction: row-reverse; 
+    align-items: flex-end; 
+}
+
+/* The Toggle Button (Stays in place at the bottom-right) */
+#social-toggle {
+    background-color: transparent; /* MODIFIED: Transparent background */
+    color: white;
+    border: none;
+    border-radius: 50%; 
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: none; /* MODIFIED: Removed box shadow */
+    transition: transform 0.3s ease, color 0.3s ease; 
+    z-index: 561; 
+}
+
+#social-toggle:hover {
+    background-color: transparent; /* MODIFIED: Ensure hover background is transparent */
+    color: #009dff; /* MODIFIED: Change icon color on hover for feedback */
+    transform: scale(1.1); /* MODIFIED: Slightly increased scale for feedback */
+}
+
+/* The Sliding Popup Menu (Contains the links) */
+.social-links-popup {
+    display: flex;
+    /* NORMAL ORDER: Links appear left-to-right inside the popup */
+    flex-direction: row; 
+    background: rgba(0, 0, 0, 0.7); 
+    border-radius: 25px;
+    padding: 10px;
+    
+    /* Initial state: Pushed off-screen to the right by 100% of its width */
+    transform: translateX(100%);
+    opacity: 0;
+    
+    /* Transition for the slide and fade effect */
+    transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+    /* Adjusted margin to push it closer to the button */
+    margin-right: 0; 
+}
+
+/* State when the menu is active/open (JS toggles this class) */
+.social-links-popup.active {
+    /* Slides the menu left, placing it next to the button */
+    transform: translateX(-10px); 
+    opacity: 1;
+}
+
+/* Style for the individual social media link icons */
+.social-links-popup a {
+    color: #ffffff;
+    font-size: 24px;
+    margin: 0 5px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links-popup a:hover {
+    color: #009dff; 
+}
+
+/* ------------------------------------------- */
+/* --- MODIFIED: Glitch Button Styling --- */
+/* ------------------------------------------- */
+.glitch-button {
+    /* Basic Button Styling */
+    display: inline-block;
+    /* MODIFIED: Reduced vertical padding from 10px to 8px and horizontal from 30px to 20px for smaller button */
+    padding: 8px 20px;
+    text-decoration: none;
+    background-color: transparent;
+    border: 3px solid #009dff;
+    color: #ffffff;
+    /* MODIFIED: Reduced font size from 1.2rem to 1rem */
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    /* Glitch Setup */
+    position: relative;
+    overflow: hidden;
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    z-index: 10;
+}
+
+.glitch-button:hover {
+    color: #000000; /* Text color changes to black on hover */
+    background-color: #009dff; /* Background changes to cyan on hover */
+    border-color: #ffffff; /* Border changes to white on hover */
+    transform: scale(1.05); /* Slight enlargement on hover */
+}
+
+
+/* ------------------------------------------- */
+/* --- SCROLL REVEAL ANIMATIONS --- */
+/* ------------------------------------------- */
+
+/* 1. Initial State for all elements with the class 'scroll-reveal' */
+.scroll-reveal {
+    opacity: 0;
+    /* Ensures a smooth transition from the initial state to the final state */
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* 2. Base Fade-In-Up (Used for headings, event list, etc.) */
+.scroll-reveal.fade-in-up {
+    transform: translateY(30px); /* Start 30px below its final position */
+}
+
+/* 3. Base Fade-In-Scale (Used for Grid Items/Album Art) */
+.scroll-reveal.fade-in-scale {
+    transform: scale(0.95); /* Start slightly smaller */
+}
+
+/* 4. Final/Active State (The element is in view) */
+.scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0) scale(1); /* Return to original position and size */
+}
+
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; /* 20px gap between rows and columns */
+  position: relative;
+}
